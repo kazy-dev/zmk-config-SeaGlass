@@ -39,7 +39,52 @@
 
         move_window_to_right {
             bindings = <&move_window_to_right>;
-            key-positions = <0 9>;
+            key-positions = <0 8>;
+        };
+
+        move_window_to_left {
+            bindings = <&move_window_to_left>;
+            key-positions = <0 16>;
+        };
+
+        adjust_window_to_right {
+            bindings = <&adjust_window_to_right>;
+            key-positions = <1 8>;
+        };
+
+        adjust_window_to_up {
+            bindings = <&adjust_window_to_up>;
+            key-positions = <1 7>;
+        };
+
+        adjust_window_to_left {
+            bindings = <&adjust_window_to_left>;
+            key-positions = <1 16>;
+        };
+
+        adjust_window_to_down {
+            bindings = <&adjust_window_to_down>;
+            key-positions = <1 17>;
+        };
+
+        adjust_c_window_right {
+            bindings = <&adjust_c_window_right>;
+            key-positions = <2 8>;
+        };
+
+        adjust_c_window_left {
+            bindings = <&adjust_c_window_left>;
+            key-positions = <2 16>;
+        };
+
+        adjust_c_window_up {
+            bindings = <&adjust_c_window_up>;
+            key-positions = <2 7>;
+        };
+
+        adjust_c_window_down {
+            bindings = <&adjust_c_window_down>;
+            key-positions = <2 17>;
         };
     };
 
@@ -77,6 +122,69 @@
             #binding-cells = <0>;
             bindings = <&kp LA(LC(LG(RIGHT_ARROW)))>;
             label = "MOVE_WINDOW_TO_RIGHT";
+        };
+
+        move_window_to_left: move_window_to_left {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LA(LC(LG(LEFT_ARROW)))>;
+            label = "MOVE_WINDOW_TO_LEFT";
+        };
+
+        adjust_window_to_right: adjust_window_to_right {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LA(LG(RIGHT_ARROW))>;
+            label = "ADJUST_WINDOW_TO_RIGHT";
+        };
+
+        adjust_window_to_up: adjust_window_to_top {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LA(LG(UP_ARROW))>;
+            label = "ADJUST_WINDOW_TO_TOP";
+        };
+
+        adjust_window_to_left: adjust_window_to_left {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LA(LG(LEFT_ARROW))>;
+            label = "ADJUST_WINDOW_TO_LEFT";
+        };
+
+        adjust_window_to_down: adjust_window_to_down {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LA(LG(DOWN_ARROW))>;
+            label = "ADJUST_WINDOW_TO_DOWN";
+        };
+
+        adjust_c_window_right: adjust_c_window_right {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LG(RIGHT_ARROW))>;
+            label = "ADJUST_C_WINDOW_RIGHT";
+        };
+
+        adjust_c_window_left: adjust_c_window_left {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LG(LEFT))>;
+            label = "ADJUST_C_WINDOW_LEFT";
+        };
+
+        adjust_c_window_up: adjust_c_window_up {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LG(UP_ARROW))>;
+            label = "ADJUST_C_WINDOW_UP";
+        };
+
+        adjust_c_window_down: adjust_c_window_down {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LG(DOWN_ARROW))>;
+            label = "ADJUST_C_WINDOW_DOWN";
         };
     };
 
