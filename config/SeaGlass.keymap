@@ -36,6 +36,11 @@
             bindings = <&kp BACKSPACE>;
             key-positions = <8 9>;
         };
+
+        move_window_to_right {
+            bindings = <&move_window_to_right>;
+            key-positions = <0 9>;
+        };
     };
 
     macros {
@@ -65,6 +70,13 @@
             #binding-cells = <0>;
             bindings = <&kp LEFT_BRACE &kp RIGHT_BRACE &kp LEFT_ARROW>;
             label = "NAMI_KAKKO";
+        };
+
+        move_window_to_right: move_window_to_right {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LA(LC(LG(RIGHT_ARROW)))>;
+            label = "MOVE_WINDOW_TO_RIGHT";
         };
     };
 
