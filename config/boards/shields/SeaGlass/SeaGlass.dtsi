@@ -62,8 +62,8 @@
             , <&key_physical_attrs 100 100 1100  300       0     0     0>
             , <&key_physical_attrs 100 100 1200  300       0     0     0>
 
-            , <&key_physical_attrs 100 100  800  400  0 0 0> /* Directキー1 (MB1) */
-            , <&key_physical_attrs 100 100  900  400  0 0 0> /* Directキー2 (MB2) */
+            , <&key_physical_attrs 100 100 1045 (-110)  0 0 0> /* Directキー1 (MB1) */
+            , <&key_physical_attrs 100 100 1155 (-110)  0 0 0> /* Directキー2 (MB2) */
             ;
     };
 
@@ -90,34 +90,42 @@
         };
     };
 
-    encoder_1: encoder_1 {
+    left_encoder: left_encoder {
         compatible = "alps,ec11";
-        a-gpios = <&gpio1 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        b-gpios = <&gpio1 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        steps = <48>;
+        a-gpios = <&gpio1 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        b-gpios = <&gpio1 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        steps = <12>;
         status = "disabled";
     };
 
 
-    encoder_2:  encoder_2 {
+    right_encoder:  right_encoder {
         compatible = "alps,ec11";
-        a-gpios = <&gpio1 13 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        b-gpios = <&gpio1 12 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        steps = <48>;
+        a-gpios = <&gpio1 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        b-gpios = <&gpio1 12 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        steps = <12>;
         status = "disabled";
     };
 
     sensors: sensors {
         compatible = "zmk,keymap-sensors";
-        sensors = <&encoder_1 &encoder_2>;
-        encoder_1 {
-            triggers-per-rotation = <48>;
+        sensors = <&left_encoder &right_encoder>;
+        left_encoder {
+            triggers-per-rotation = <6>;
         };
-        encoder_2 {
-            triggers-per-rotation = <48>;
+        right_encoder {
+            triggers-per-rotation = <6>;
         };
 
     };
+
+    chg_stat: chg_stat {
+        compatible = "custom,chg-stat";
+        /* Adjust for your board, e.g., P0.17 for XIAO nRF52840 */
+        gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
+        status = "okay";
+    };
+
 
     kscan_matrix: kscan_matrix {
         compatible = "zmk,kscan-gpio-matrix";

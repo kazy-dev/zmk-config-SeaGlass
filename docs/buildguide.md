@@ -1,17 +1,20 @@
-# ビルドガイド
+# SeaGlass ビルドガイド
 
-- [ビルドガイド](#ビルドガイド)
+- [SeaGlass ビルドガイド](#seaglass-ビルドガイド)
   - [1. 準備](#1-準備)
     - [1-1. 同梱品チェック](#1-1-同梱品チェック)
     - [1-2. 組立前にお客様自身で準備いただく部品](#1-2-組立前にお客様自身で準備いただく部品)
     - [1-3. 必要な工具](#1-3-必要な工具)
+    - [1-4. 組付け済部品の分解](#1-4-組付け済部品の分解)
   - [2. はんだ付け手順](#2-はんだ付け手順)
-    - [2-1. 右手マウスクリックボタンのはんだ付け](#2-1-右手マウスクリックボタンのはんだ付け)
-    - [2-2. 左手ロータリーエンコーダのはんだ付け](#2-2-左手ロータリーエンコーダのはんだ付け)
-    - [2-3. 左右共通・電源スイッチはんだ付け](#2-3-左右共通電源スイッチはんだ付け)
-    - [2-4. 左右共通・キーソケットはんだ付け](#2-4-左右共通キーソケットはんだ付け)
-    - [2-5. トラックボールセンサーはんだ付け](#2-5-トラックボールセンサーはんだ付け)
-    - [2-6. トラボレンズ固定](#2-6-トラボレンズ固定)
+    - [2-1. マイコンのはんだ付け](#2-1-マイコンのはんだ付け)
+    - [2-2. 右手マウスクリックボタンのはんだ付け](#2-2-右手マウスクリックボタンのはんだ付け)
+    - [2-3. 左手ロータリーエンコーダのはんだ付け](#2-3-左手ロータリーエンコーダのはんだ付け)
+    - [2-4. 左右共通・電源スイッチはんだ付け](#2-4-左右共通電源スイッチはんだ付け)
+    - [2-5. 左右共通・キーソケットはんだ付け](#2-5-左右共通キーソケットはんだ付け)
+    - [2-6. トラックボールセンサー接続用ピンヘッダはんだ付け](#2-6-トラックボールセンサー接続用ピンヘッダはんだ付け)
+    - [2-7. トラックボールセンサーはんだ付け](#2-7-トラックボールセンサーはんだ付け)
+    - [2-8. トラボレンズ固定](#2-8-トラボレンズ固定)
   - [3. 組み立て手順](#3-組み立て手順)
     - [3-1. 右手側組み立て手順](#3-1-右手側組み立て手順)
     - [3-2. 左手側組み立て手順](#3-2-左手側組み立て手順)
@@ -20,10 +23,12 @@
     - [4-2. テスト用ファームウェアの書き込みとペアリング](#4-2-テスト用ファームウェアの書き込みとペアリング)
     - [4-3. Bluetooth切り替え手順](#4-3-bluetooth切り替え手順)
     - [4-4. 動作確認](#4-4-動作確認)
-    - [4-5. ZMK Studioの活用](#4-5-zmk-studioの活用)
+    - [4-5. ZMK Studio・DYA Studioの活用](#4-5-zmk-studioの活用)
     - [4-6. ZMKファームウェアのカスタマイズとビルド方法](#4-6-zmkファームウェアのカスタマイズとビルド方法)
   - [5. お疲れさまでした](#5-お疲れさまでした)
 
+
+![sea](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/sea.jpg)
 
 <a id="1-準備"></a>
 ## 1. 準備
@@ -46,13 +51,9 @@
 | セラミック球2mm | 3個 | 右手側用トッププレートに組み込み済 |
 | キーキャップ（白） | 30個 | 3DP製 |
 | キーキャップ（青） | 10個 | 3DP製 |
-| キーキャップ（白） | 10個 | 予備・色変え用 |
 | ロータリーエンコーダ用ホイール（青） | 2個 | 3DP製 |
-| ロータリーエンコーダ用ホイール（白） | 2個 | 予備・色変え用 |
 | ロータリーエンコーダホイール用軸（青） | 2個 | 3DP製 |
-| ロータリーエンコーダホイール用軸（白） | 2個 | 予備・色変え用 |
 | 電源スイッチカバー（青） | 2個 | 3DP製 |
-| 電源スイッチカバー（白） | 2個 | 予備・色変え用 |
 | リセットボタン用パーツ | 2個 | 3DP製 |
 | ロータリーエンコーダ | 2個 | |
 | マウスクリック用スイッチ | 2個 | |
@@ -61,10 +62,9 @@
 | ネジM2 4mm | 8本 | |
 | マイコン(xiao ble plus) | 2個 | はんだ付け済 |
 | 滑り止め用ゴム足 | 8個 | |
-| ガスケットマウント用クッション | 8個 | |
-| lipoバッテリー | 2個 | テスター頒布時のみ同梱 |
+| ガスケットマウント用クッション | 6個 | |
 
-![all](img/all.jpg)
+![all](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/all.jpg)
 
 
 同梱品に不足がある場合は、お手数ですがご連絡いただけますと幸いです。\
@@ -79,6 +79,7 @@
 | Lipoバッテリー | 2個 | 推奨バッテリーについては後述します |
 | 17mmピッチ対応キーキャップ | 40個 | キーキャップ無しモデルの場合のみ別途ご用意ください |
 | マイコン(xiao ble plus) | 2個 | マイコン無しモデルの場合のみ別途ご用意ください |
+| 磁石 (直径6mm 厚さ2~3mm) | 8個 | 左右合体させたい方は磁石を別途ご用意ください。百均で購入可能です。|
 
 
 SeaGlassのバッテリーは以下のバッテリーサイズを基準に設計していますので、こちらの購入をおすすめします。\
@@ -102,89 +103,145 @@ https://www.amazon.co.jp/dp/B0FBWJFCLB/?coliid=I3BOB6AZA0OG7C
 | ピンセット | |
 | 両面テープ | バッテリー固定用 |
 
+<a id="1-4-組付け済部品の分解"></a>
+### 1-4. 組付け済部品の分解
+
+梱包時に組付けられた状態になっている部品がいくつかあります。\
+組み立てを行う前に、一度それらを分解してください。半組み立てキット場合の説明を記載していますが、お手元のキットの形態に応じて適宜読み替えてください。
+
+1. 背面のネジを４本外し、底面ケースを取り外します。
+2. 基板とトッププレートを取り外します。半組み立てキットの場合マイコンがケースと干渉するため基板を斜めに持ち上げるように取り外してください。
+![1-4-1](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/1-4-1.jpeg)
+3. （左手側のみ）ロータリーエンコーダが刺さっているので取り外します。ホイールパーツを軸から取り外します。軸はロータリーエンコーダに刺さったままにしておいて大丈夫です。
+![1-4-2](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/1-4-2.jpeg)
+4. （右手側のみ）トラックボール読み取り基板を取り外します。ぐりぐりと引っ張ると抜けます。
+![1-4-3](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/1-4-3.jpeg)
+5. トッププレートにキーキャップマウント用のパーツがついているので取り外します。
+6. キーキャップマウントからキーキャップを取り外します。ドライバーやピンセットなどで裏側から軸を押し出すと外しやすいと思います。キーキャップマウントはもう使わないので処分して大丈夫です。
+![1-4-4](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/1-4-4.jpeg)
+
 <a id="2-はんだ付け手順"></a>
 ## 2. はんだ付け手順
 
 ここからはんだ付け作業に入ります。\
 特に断りがない作業は左右どちらの基板でも同じ作業をすると読み取ってください。
 
-<a id="2-1-右手マウスクリックボタンのはんだ付け"></a>
-### 2-1. 右手マウスクリックボタンのはんだ付け
+はんだ付けが少しやりやすくなる治具を用意したので、３Dプリンターをお持ちの方は以下からSTLをダウンロードし出力して使用してみてください。（出力品の販売などは行っておりません）\
+[ダウンロード](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/はんだ付け治具.stl)
+
+治具を使用しない場合はマスキングテープなどで基板や部品がずれないように適宜固定しながらはんだ付けを行うことをおすすめします。
+
+<a id="2-1-マイコンのはんだ付け"></a>
+### 2-1. マイコンのはんだ付け
+
+※ 半組み立てキットではこの工程は対応不要です！\
+※ 最難関の工程となるので気合を入れて挑んでください！
+
+1. 画像のようにピンヘッダを片側に差し込みマイコンを固定します。基板の裏表を間違えないよう注意してください。
+![mcu1](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/mcu1.jpeg)
+2. はんだがブリッジしないよう注意しながらはんだ付けを行ってください。この際、右手側基板については必ずマイコン側面のランドにのみはんだ付けを行うようにし、スルーホール部分にはんだが乗らないように注意してください。画像2枚目のようになればOKです。
+![mcu2](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/mcu2.jpeg)
+![mcu3](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/mcu3.jpeg)
+3. ピンヘッダを取り外し、反対側も同様にはんだ付けを行います。もしはんだがブリッジしてしまった場合は、画像のようにはんだ吸い取り線を用いることでブリッジを解消することができます。画像3枚目のようになればOKです。
+![mcu4](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/mcu4.jpeg)
+![mcu5](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/mcu5.jpeg)
+![mcu6](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/mcu6.jpeg)
+4. （右手側基板のみ）トラックボール読み取り基板接続用のピンソケットをはんだ付けします。画像の場所にピンソケットを差し込み、基板の表側からはんだ付けを行ってください。
+![mcu7](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/mcu7.jpeg)
+![mcu11](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/mcu11.png)
+![mcu8](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/mcu8.jpeg)
+5. マイコン裏側のBAT+とRSTをはんだ付けします。画像のようになればOKです。後ほどの動作確認時にバッテリーを接続しても認識されなかったりリセットボタンを押しても反応しない場合はここのはんだ付けがうまくいっているか確認してみてください。
+![mcu9](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/mcu9.jpeg)
+![mcu10](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/mcu10.png)
+
+<a id="2-2-右手マウスクリックボタンのはんだ付け"></a>
+### 2-2. 右手マウスクリックボタンのはんだ付け
 
 右手側基板にマウスクリックボタンを取り付けます。
 
-1. マウスクリックボタンを基板の表面に置きます。
+1. マウスクリックボタンを基板の表面に置きます。スイッチ部分が上側になるように配置してください。
 2. 片側の足をはんだ付けします。パッドまではんだがしっかり流れるよう十分に加熱してください。
-![right1](img/right1.png)
+![right1](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/right1.png)
 3. ズレや浮きがないことを確認したら反対側の足もはんだ付けします。
-![right2](img/right2.png)
+![right2](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/right2.png)
 4. 画像のようになればOKです。
-![right3](img/right3.png)
+![right3](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/right3.png)
 
-<a id="2-2-左手ロータリーエンコーダのはんだ付け"></a>
-### 2-2. 左手ロータリーエンコーダのはんだ付け
+<a id="2-3-左手ロータリーエンコーダのはんだ付け"></a>
+### 2-3. 左手ロータリーエンコーダのはんだ付け
 
 左手側基板にロータリーエンコーダを取り付けます。
 
 1. ロータリーエンコーダを基板の表面から差し込みます。ホイール部品は邪魔になるので外しておいてください。（軸は刺したままで大丈夫です。）
 2. 基板を裏返し、はみ出した足をニッパーでカットしてください。
-![left1](img/left1.png)
+![left1](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/left1.png)
 3. ロータリーエンコーダが浮いたり傾かないように注意しながらはんだ付けしてください。
 4. 画像のようになればOKです。
-![left2](img/left2.png)
-![left3](img/left3.png)
+![left2](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/left2.png)
+![left3](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/left3.png)
+5. （テスター頒布版のみ）ロータリーエンコーダがチャタリングを起こす場合は画像のように真ん中のピンと左右のピンをつなぐようにコンデンサを追加することでチャタリングを低減することができます。(応急処置なのではんだ付けが汚くてすみません。)\
+   コンデンサは10nFか22nF推奨です。本頒布版では基板に組み込むので本対応は不要です！
+![left4](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/left4.jpg)
 
-<a id="2-3-左右共通電源スイッチはんだ付け"></a>
-### 2-3. 左右共通・電源スイッチはんだ付け
+<a id="2-4-左右共通電源スイッチはんだ付け"></a>
+### 2-4. 左右共通・電源スイッチはんだ付け
 
 左右両方の基板に電源スイッチを取り付けます。
 
 1. スライドスイッチを基板の表面から差し込み、マスキングテープなどで固定してください。
 2. 基板を裏返し、はみ出した足をニッパーでカットしてください。
-![pw1](img/pw1.png)
+![pw1](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/pw1.png)
 3. スライドスイッチが浮かないように注意しながらはんだ付けします。
-![pw2](img/pw2.png)
+![pw2](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/pw2.png)
 4. 画像のようになればOKです。
-![pw3](img/pw3.png)
+![pw3](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/pw3.png)
 
-<a id="2-4-左右共通キーソケットはんだ付け"></a>
-### 2-4. 左右共通・キーソケットはんだ付け
+<a id="2-5-左右共通キーソケットはんだ付け"></a>
+### 2-5. 左右共通・キーソケットはんだ付け
 
 左右両方の基板にキーソケットを取り付けます。左右各20個、合計40個のキーソケットが必要です。
 
 1. キーソケットのフットプリントの片側にはんだを盛ります。
-![sc1](img/sc1.png)
+![sc1](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/sc1.png)
 2. フットプリントの形と合うようにキーソケットを置いてください。
-![sc2](img/sc2.png)
+![sc2](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/sc2.png)
 3. キーソケットをピンセットなどで抑えながら盛ったはんだを溶かしてください。
-![sc3](img/sc3.png)
+![sc3](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/sc3.png)
 4. キーソケットが固定できたら、反対側にもはんだ付けを行ってください。
 
-<a id="2-5-トラックボールセンサーはんだ付け"></a>
-### 2-5. トラックボールセンサーはんだ付け
+<a id="2-6-トラックボールセンサー接続用ピンヘッダはんだ付け"></a>
+### 2-6. トラックボールセンサー接続用ピンヘッダはんだ付け
+
+Comming soon...\
+※ 半組み立てキットではこの工程は対応不要です！\
+※ 現行ロットでは組み立てキットでもこの工程は対応不要です！
+
+<a id="2-7-トラックボールセンサーはんだ付け"></a>
+### 2-7. トラックボールセンサーはんだ付け
 
 トラックボール読み取りセンサーを基板に取り付けます。
 
-1. センサーを基板に差し込みます。画像を参考に、向きを間違えないようにしてください。
-![tb1](img/tb1.png)
-2. センサーをマスキングテープなどで固定してください。
-3. すべてのピンにはんだ付けをします。はんだを盛りすぎない・長時間熱しすぎないように注意してください。
-4. 画像のようになればOKです。
-![tb2](img/tb2.png)
+1. 半組み立てキットの場合、トラックボール基板にピンをはんだ付け済みで、右手側基板のソケットの差し込み済の状態になっています。センサーのはんだ付けのため、メイン基板からトラックボール基板を引き抜いてください。
+2. センサーを基板に差し込みます。画像を参考に、向きを間違えないようにしてください。
+![tb1](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/tb1.png)
+1. センサーをマスキングテープなどで固定してください。
+2. すべてのピンにはんだ付けをします。はんだを盛りすぎない・長時間熱しすぎないように注意してください。
+3. 画像のようになればOKです。
+![tb2](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/tb2.png)
 
-<a id="2-6-トラボレンズ固定"></a>
-### 2-6. トラボレンズ固定
+<a id="2-8-トラボレンズ固定"></a>
+### 2-8. トラボレンズ固定
 
 トラックボールセンサー用レンズを取り付けます。
 
 1. センサーの保護シールを剥がします。
-![tb3](img/tb3.png)
+![tb3](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/tb3.png)
 2. センサー用レンズを差し込みます。向きを間違えないように注意してください。
-![tb4](img/tb4.png)
+![tb4](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/tb4.png)
 3. センサー裏面の、レンズのピンがはみ出している箇所に剥がした保護シールを乗せ、その上からはんだごてを軽く当ててピンを溶かし、センサー用レンズを固定してください。
-![tb5](img/tb5.png)
+![tb5](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/tb5.png)
 4. 画像のようにレンズのピンが平たく潰れていればOKです。
-![tb6](img/tb6.png)
+![tb6](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/tb6.png)
 
 以上ではんだ付けは完了です。お疲れさまでした！\
 各パーツが正しく取り付けられているか、もう一度ご確認ください。
@@ -198,45 +255,45 @@ https://www.amazon.co.jp/dp/B0FBWJFCLB/?coliid=I3BOB6AZA0OG7C
 ### 3-1. 右手側組み立て手順
 
 1. トッププレートを乗せ、位置がずれないようにキースイッチをいくつかはめ込んでください。
-![rt1](img/rt1.png)
+![rt1](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/rt1.png)
 2. 画像を参考にクッションシールを貼ってください。一部カットが必要です。
-![rt2](img/rt2.png)
+![rt2](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/rt2.jpg)
 3. バッテリーコネクタを差し込んでください。コネクタの相性によってかなり硬いことがありますが、コネクタの向きがあっていれば画像の深さまで差し込むことができます。
-![rt3](img/rt3.png)
+![rt3](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/rt3.png)
 4. トラックボール基板を差し込んでください。
-![rt4](img/rt4.png)
+![rt4](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/rt4.png)
 5. ボトムプレートの四隅にゴム足を貼り付けてください。ボトムプレートは左右共通です。
-![rt5](img/rt5.png)
-6. ボトムプレートにリセットスイッチ用パーツを乗せてください。固定はされないので落とさないよう取り扱いに注意してください。
-![rt6](img/rt6.png)
-7. ボトムプレートにバッテリーを装着してください。
-![rt7](img/rt7.png)
-8. 右手側カバーにPOM球を乗せてください。
-![rt8](img/rt8.png)
-9. マイコンのUSBコネクタをトッププレートの穴にあわせるように意識しながら、斜めから挿し込むように基板をセットしてください。
-![rt9](img/rt9.png)
-10. リセットスイッチがはずれないよう注意しつつボトムプレートを閉じ、4箇所ネジ止めしてください。このときネジを強く締めすぎるとネジ穴が潰れてしまう可能性があるので、締めすぎには注意してください。
-![rt10](img/rt10.png)
-![rt11](img/rt11.png)
-11. 電源スイッチを装着してください。
-![lt5](img/lt5.png)
-12. キーキャップとキースイッチを取り付けたら完成です！
+![rt5](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/rt5.png)
+6. （任意）左右を磁石で合体させたい方はボトムプレートに磁石をはめ込んでください。底面同士がくっつくように極性をしっかり確認してください。
+7. ボトムプレートにリセットスイッチ用パーツを乗せてください。固定はされないので落とさないよう取り扱いに注意してください。
+![rt6](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/rt6.png)
+9. ボトムプレートにバッテリーを装着してください。
+![rt7](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/rt7.png)
+9. 右手側カバーにPOM球を乗せてください。
+![rt8](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/rt8.png)
+10. マイコンのUSBコネクタをトッププレートの穴にあわせるように意識しながら、斜めから挿し込むように基板をセットしてください。
+![rt9](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/rt9.png)
+11. リセットスイッチがはずれないよう注意しつつボトムプレートを閉じ、4箇所ネジ止めしてください。このときネジを強く締めすぎるとネジ穴が潰れてしまう可能性があるので、締めすぎには注意してください。
+![rt10](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/rt10.png)
+![rt11](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/rt11.png)
+12. 電源スイッチを装着してください。
+![lt5](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/lt5.png)
+13. キーキャップとキースイッチを取り付けたら完成です！
 
 <a id="3-2-左手側組み立て手順"></a>
 ### 3-2. 左手側組み立て手順
 
-1. 画像のようにロータリーエンコーダに軸とホイールを装着してください。青と白のホイールが付属しているので、お好みの色を使用してください。
-![lt1](img/lt1.png)
+1. 画像のようにロータリーエンコーダに軸とホイールを装着してください。トッププレートを装着した後はロータリーエンコーダのつけ外しができなくなるので組み立ての順番に注意してください。
+![lt1](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/lt1.png)
 2. ホイールの下に滑り込ませるようにトッププレートを装着してください。
-![lt2](img/lt2.png)
+![lt2](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/lt2.png)
 3. 右手側と同様にクッションシールおよびゴム足貼り付けと、バッテリー・リセットスイッチの装着を行ってください。
-![lt3](img/lt3.png)
 4. 右手側と同様に斜め方向からトップカバーを装着してください。ロータリーエンコーダとホイールのはめ込みがある分右手側よりややシビアですが、信じてグッとやればズボッとハマるはずです。
-![lt4](img/lt4.png)
+![lt4](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/lt4.png)
 5. 右手側と同様にネジを4箇所止め、電源スイッチを装着してください。
 6. キーキャップとキースイッチを取り付けたら完成です！
 
-![fin](img/fin.png)
+![fin](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/fin.png)
 組み立ておつかれさまでした！
 
 <a id="4-ファームウェア"></a>
@@ -248,7 +305,7 @@ https://www.amazon.co.jp/dp/B0FBWJFCLB/?coliid=I3BOB6AZA0OG7C
 ### 4-1. テスト用ファームウェアのダウンロード
 
 以下のリンクからファームウェアをダウンロードしてください。\
-[ダウンロード](test_firmware.zip)
+[ダウンロード](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/test_firmware.zip)
 
 ダウンロード後zipファイルを展開し、
 - `SeaGlass_L rgbled_adapter-seeeduino_xiao_ble-zmk.uf2`
@@ -260,16 +317,15 @@ https://www.amazon.co.jp/dp/B0FBWJFCLB/?coliid=I3BOB6AZA0OG7C
 <a id="4-2-テスト用ファームウェアの書き込みとペアリング"></a>
 ### 4-2. テスト用ファームウェアの書き込みとペアリング
 
-マイコンにファームウェアを書き込みます。テスト用といいつつ通常動作するファームウェアなので、この工程が済むと一旦の完成になります。（キーマップは確認用の暫定的なものです。）\
-おそらく今後自分だけのファームウェア設定を模索していくことになると思います。テスト用ではない本番のファームウェアはぜひ皆さんの手で作り上げてください。
+マイコンにファームウェアを書き込みます。テスト用といいつつ通常動作するファームウェアなので、この工程が済むと一旦の完成になります。
 
 1. マイコンをブートローダーモードにします。
    - PCとSeaGlass右手側をUSBケーブルで接続します。
    - リセットボタンを素早く2回押します。SeaGlassのリセットボタンは本体裏面の白いボタンです。
-   - PC上で「NO NAME」という名称でドライブが認識されれば成功です。（マイコンのロットなどによっては表示名が異なる場合があります。）
-2. 「NO NAME」ドライブに `settings_reset-seeeduino_xiao_ble-zmk.uf2` をドラッグ&ドロップまたはコピー&ペーストで書き込みます。この時、macの場合画像のようなメッセージが出る場合がありますが、「NO NAME」ドライブが自動的に認識されなくなっていたら書き込みに成功しています。\
+   - PC上で「NO NAME」や「XIAO-BOOT」などの名称でドライブが認識されれば成功です。（マイコンのロットなどによって表示名が異なる場合があります。）
+2. 表示されたドライブに `settings_reset-seeeduino_xiao_ble-zmk.uf2` をドラッグ&ドロップまたはコピー&ペーストで書き込みます。この時画像のようなメッセージが出る場合がありますが、ドライブが自動的に認識されなくなっていたら書き込みに成功しています。\
    `settings_reset-seeeduino_xiao_ble-zmk.uf2` は設定初期化用のファイルなので、基本的に今後は書き込み不要です。
-  ![err1](img/err1.png)
+  ![err1](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/err1.png)
 3. 再度マイコンをブートローダーモードにし、今度は右手用のファームウェア`SeaGlass_R rgbled_adapter-seeeduino_xiao_ble-zmk.uf2` を同様の手順で書き込みます。この時も同様のメッセージが出ることがありますが、正常です。
 4. 左手側も同様の手順で`settings_reset-seeeduino_xiao_ble-zmk.uf2` → `SeaGlass_L rgbled_adapter-seeeduino_xiao_ble-zmk.uf2` の順番で書き込みを行います。
 5. 左右の書き込みが完了したらUSBケーブルを取り外し、両方のSeaGlassのスイッチをオン（上側）にし、マイコンのリセットスイッチを左右どちらも一度ずつ押します
@@ -285,7 +341,14 @@ https://www.amazon.co.jp/dp/B0FBWJFCLB/?coliid=I3BOB6AZA0OG7C
     - 右手側：🟢/🟡/🔴（バッテリーの充電状況次第）→ 🟡（機器とのペアリング中）
   
   詳細は[zmk-rgbled-widget](https://github.com/caksoylar/zmk-rgbled-widget)のREADMEをご覧ください。
+
 7. 正常に点灯していたらPC側でBluetoothデバイスとして「SeaGlass」が認識されているはずです。そのまま接続を行ってください。
+
+テスト用ファームウェアのキーマップは普段自分が使用しているものなので、あまり汎用的ではない設定が含まれています。\
+おそらくこれから自分だけのファームウェア設定を模索していくことになると思います。テスト用ではない本番のファームウェアはぜひ皆さんの手で作り上げてください！
+
+以下は本ファームウェアで設定されているキーマップになります。参考にしてみてください。\
+![keymap](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/keymap.svg)
 
 <a id="4-3-bluetooth切り替え手順"></a>
 ### 4-3. Bluetooth切り替え手順
@@ -305,6 +368,14 @@ Bluetoothの接続後、キーやトラックボールの動作を確認して�
 <a id="4-5-zmk-studioの活用"></a>
 ### 4-5. ZMK Studioの活用
 
+※ 2026/06/16追記\
+本ファームウェアはキーマップ変更ツールDYA Studioに対応しました！\
+DYA Studioは[こちら](https://studio.dya.cormoran.works/)です。 special thanks! [cormoran](https://x.com/cormoran707) さん\
+ZMK Studioより多彩な設定がファームウェアのビルド無しで行えます。ぜひ使ってみてください。\
+※ 追記終わり
+
+
+
 SeaGlassはZMK Studioに対応しています。ZMK Studioを使用することでファームウェアを書き換えることなくGUIでキーマップを簡単に編集できます。\
 ただしZMK Studio自体まだ開発段階？のようで、設定可能なキーボード設定に一部制限があります。なのでZMK Studioでのカスタマイズのみでは後々物足りなくなる可能性が高いですが、GitHubに慣れていない方などはまずはこちらでいろいろ触ってみるのも手だと思います。
 
@@ -320,11 +391,14 @@ SeaGlassはZMK Studioに対応しています。ZMK Studioを使用すること�
 ### 4-6. ZMKファームウェアのカスタマイズとビルド方法
 
 ZMK Studioで対応していない高度な設定を行いたい場合は、直接ファームウェアをカスタマイズしてビルドする必要があります。ファームウェアのカスタマイズビルドにはGitHubを使用します。\
-おおまかなフローは以下のとおりです。（リポジトリ名はSeaGlassに読み替えてください。）\
-ここでは各ツールの細かな使い方の説明はしませんので、必要に応じて調べてみてください。
-![flow](img/flow.jpg)
+ファームウェアのリポジトリはこちらです。\
+[zmk-config-SeaGlass](https://github.com/hama-be/zmk-config-SeaGlass)
 
-1. 本リポジトリをフォークする
+ファームウェアのビルド〜書き込みのおおまかなフローは以下のとおりです。（画像内のリポジトリ名がSeaSide39になっていますが、適宜SeaGlassに読み替えてください。）\
+ここでは各ツールの細かな使い方の説明はしませんので、必要に応じて調べてみてください。
+![flow](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/flow.jpg)
+
+1. [zmk-config-SeaGlass](https://github.com/hama-be/zmk-config-SeaGlass)をフォークする
   - あなたのGitHubアカウント上に`zmk-config-SeaGlass`リポジトリが表示されていればOKです。
 2. 手動またはKeymapEditorでファームウェアを編集する
   - [ZMK Keymap Editor](https://nickcoutsos.github.io/keymap-editor/) とあなたのGitHubアカウントを接続すると、KeymapEditorから直接リポジトリへ変更をプッシュすることができます。
@@ -332,7 +406,7 @@ ZMK Studioで対応していない高度な設定を行いたい場合は、直�
   - 「GitHub Actions」という機能を使って、コードをリモートリポジトリへプッシュするたびに自動的にファームウェアがビルドされます。
   - Actionsはリポジトリの「Actions」タブから確認できます。初回は手動で有効化が必要です。
   - リポジトリに変更をプッシュすると数分でビルドが完了します。「Actions」タブから最新のワークフローを開き、Artifactsからファームウェアをダウンロードしてください。
-    ![build](img/build.png)
+    ![build](https://raw.githubusercontent.com/hama-be/zmk-config-SeaGlass/refs/heads/main/docs/img/build.png)
   - ダウンロードしたファームウェアを書き込みます。キーマップの変更の場合は右側だけの書き込みでOKです。
 
 

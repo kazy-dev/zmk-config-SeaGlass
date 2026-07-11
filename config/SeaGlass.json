@@ -49,24 +49,24 @@
         { "row": 3, "col":  8, "x": 11.512, "y": 3.007 },
         { "row": 3, "col":  9, "x": 12.514, "y": 3.007 },
 
-        { "row": 4, "col":  0, "x": 13.516, "y":     0 },
-        { "row": 4, "col":  1, "x": 14.519, "y":     0 }
+        { "row": 4, "col":  5, "x": 10.962, "y":-1.103 },
+        { "row": 4, "col":  6, "x": 12.064, "y":-1.103 }
 
       ]
     }
   },
   "sensors": [
     {
-      "ref": "encoder_1",
-      "name": "encoder_1",
-      "identifier": "encoder_1",
+      "ref": "left_encoder",
+      "name": "left_encoder",
+      "identifier": "left_encoder",
       "compatible": "alps,ec11",
       "enabled": true
     },
     {
-      "ref": "encoder_2",
-      "name": "encoder_2",
-      "identifier": "encoder_2",
+      "ref": "right_encoder",
+      "name": "right_encoder",
+      "identifier": "right_encoder",
       "compatible": "alps,ec11",
       "enabled": true
 

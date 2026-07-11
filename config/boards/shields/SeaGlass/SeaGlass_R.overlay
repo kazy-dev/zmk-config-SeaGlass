@@ -1,4 +1,8 @@
 #include "SeaGlass.dtsi"
+#include <input/processors.dtsi>
+#include <input/processors/runtime-input-processor.dtsi>
+#include <dt-bindings/zmk/input_transform.h>
+#include <behaviors/battery_history_request.dtsi>
 
 &default_transform {
     col-offset = <5>;
@@ -40,7 +44,15 @@
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-
+        input-processors = <&mouse_runtime_input_processor>;
+        scroller {
+            layers = <7>;
+            input-processors = <&zip_xy_to_scroll_mapper
+                                &zip_scroll_transform INPUT_TRANSFORM_Y_INVERT
+                                &scroll_runtime_input_processor
+                                &zip_xy_scaler 1 30
+                                &zip_xy_to_scroll_mapper>;
+        };
     };
 };
 
@@ -82,8 +94,6 @@
         reg = <0>;
         spi-max-frequency = <4000000>;
         irq-gpios = <&gpio1 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        snipe-layers = <1>;
-        // automouse-layer = <4>; //ここをコメントアウトするとオートマウスレイヤーがオフになる
-        scroll-layers = <5>;
+        snipe-layers = <2>;
     };
 };
